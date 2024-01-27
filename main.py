@@ -8,7 +8,7 @@ WIFI_SSID = 'your_wifi_ssid'
 WIFI_PASSWORD = 'your_wifi_password'
 
 # Server details
-TCP_IP = 'your_device_ip_address'
+IP_ADDRESS = 'your_device_ip_address'
 TCP_PORT = 50000 
 
 # Initialize UART and LED
@@ -28,18 +28,26 @@ while not wlan.isconnected():
     blink_led()
     time.sleep(0.1)
 
-led.on()
+led.off()
 print("Connected to WiFi")
 
-# Establish a new TCP connection
+# Establish a new TCP connection with retry mechanism
 def create_tcp_connection():
-    sock = socket.socket(socket.AF_INET, socket.SOCK_STREAM)
-    sock.connect((TCP_IP, TCP_PORT))
-    return sock
+    while True:
+        try:
+            sock = socket.socket(socket.AF_INET, socket.SOCK_STREAM)
+            sock.connect((IP_ADDRESS, TCP_PORT))
+            print("Connected to TCP server")
+            return sock
+        except Exception as e:
+            print(f"Failed to connect to TCP server: {e}")
+            print("Retrying in 5 seconds...")
+            time.sleep(5)
 
 # Create initial TCP socket and connect
 s = create_tcp_connection()
-print("connected to TCP server")
+led.on()
+
 try:
     while True:
         # Check for incoming UART data first
