@@ -48,7 +48,7 @@ def write_wifi_credentials_to_temp_file():
     temp_dir = tempfile.gettempdir()
     temp_file_path = os.path.join(temp_dir, "wifi_credentials.txt")
     with open(temp_file_path, 'w') as file:
-        file.write(f"{ssid}\n{wifi_password}\n{get_ip_address()}")
+        file.write(f"{ssid}\n{wifi_password}\n{get_ip_address()}\n")
     # Change the file permissions to ensure it can be read without sudo
     os.chmod(temp_file_path, 0o644)
     return temp_file_path
@@ -80,7 +80,7 @@ def read_config_and_update_main(temp_cred_file):
 
     main_lines[6] = f"WIFI_SSID = '{ssid_line}'\n"
     main_lines[7] = f"WIFI_PASSWORD = '{password_line}'\n"
-    main_lines[10] = f"IP_ADDRESS = '{ip_address_line}'"
+    main_lines[10] = f"IP_ADDRESS = '{ip_address_line}'\n"
 
     with open('main.py', 'w') as main_file:
         main_file.writelines(main_lines)

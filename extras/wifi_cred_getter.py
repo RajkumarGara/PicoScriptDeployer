@@ -46,7 +46,7 @@ def write_pi_wifi_credentials():
             with open('config.txt', 'w') as config_file:
                 config_file.write(f"WIFI_SSID = '{ssid}'\n")
                 config_file.write(f"WIFI_PASSWORD = '{wifi_password}'\n")
-                config_file.write(f"IP_ADDRESS = '{ip_address}'")
+                config_file.write(f"IP_ADDRESS = '{ip_address}'\n")
             print("Wi-Fi credentials written to config.txt")
         else:
             print("Wi-Fi password not found")
