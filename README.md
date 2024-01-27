@@ -30,6 +30,7 @@ python PicoScriptDeployer.py
 ## Developer Notes
 * The [`main.py`](./main.py) will be deployed only to the most recently connected Pico if multiple Picos are attached to the Pi.
 * If [`PicoScriptDeployer.py`](./PicoScriptDeployer.py) cannot detect your Wi-Fi details, you can manually update [`config.txt`](./config.txt) with the correct credentials.
+* After the code is deployed to the Pico, it will automatically reset and run the code.
 * Files in the [`extras`](./extras) folder are optional for this project. See the points below for more details.
 * Run [`wifi_cred_getter.py`](./extras/wifi_cred_getter.py) on the Pi to retrieve its wifi SSID, password and IP-address, and save these details in [`config.txt`](./config.txt). 
 * Run [`PicoJustScriptDeployer.py`](./extras/PicoJustScriptDeployer.py) on the Pi connected to the Pico to deploy [`main.py`](./main.py) on the Pico without modifying the wifi credentials. 

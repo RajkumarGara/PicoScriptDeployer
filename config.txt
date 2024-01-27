@@ -1,2 +1,3 @@
 WIFI_SSID = 'enter your wifi ssid'
 WIFI_PASSWORD = 'enter your wifi password'
+IP_ADDRESS = 'enter the Raspberry-Pi ip address here'

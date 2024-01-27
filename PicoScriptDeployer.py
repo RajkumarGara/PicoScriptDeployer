@@ -48,7 +48,7 @@ def write_wifi_credentials_to_temp_file():
     temp_dir = tempfile.gettempdir()
     temp_file_path = os.path.join(temp_dir, "wifi_credentials.txt")
     with open(temp_file_path, 'w') as file:
-        file.write(f"{ssid}\n{wifi_password}\n{get_ip_address()}\n")
+        file.write(f"{ssid}\n{wifi_password}\n{get_ip_address()}")
     # Change the file permissions to ensure it can be read without sudo
     os.chmod(temp_file_path, 0o644)
     return temp_file_path
@@ -67,6 +67,10 @@ def get_connected_picos():
 # Function to transfer script to Pico
 def transfer_script_to_pico(port):
     os.system(f'rshell -p {port} "cp main.py /pyboard"')
+
+# Function to reset the Pico
+def reset_pico(port):
+    os.system(f'rshell -p {port} repl "~ import machine ~ machine.reset() ~"')
 
 # Function to read config and update main.py
 def read_config_and_update_main(temp_cred_file):
@@ -107,6 +111,8 @@ def main():
                 print("Transferring the main.py script.")
                 transfer_script_to_pico(pico_port)
                 print("Script transferred.")
+                print("Resetting Pico to run the new script.")
+                reset_pico(pico_port)
 
             known_picos = current_connected_picos
             time.sleep(5)

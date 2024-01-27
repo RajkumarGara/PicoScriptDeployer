@@ -18,6 +18,9 @@ def get_connected_picos():
 def transfer_script_to_pico(port):
     os.system(f'rshell -p {port} "cp main.py /pyboard"')
 
+# Function to reset the Pico
+def reset_pico(port):
+    os.system(f'rshell -p {port} repl "~ import machine ~ machine.reset() ~"')
 
 def main():
     print("Waiting for Pico to be connected...")
@@ -33,6 +36,8 @@ def main():
             print("Transferring the main.py script.")
             transfer_script_to_pico(pico_port)
             print("Script transferred.")
+            print("Resetting Pico to run the new script.")
+            reset_pico(pico_port)
 
         known_picos = current_connected_picos
         time.sleep(5)
